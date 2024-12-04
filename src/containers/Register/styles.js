@@ -56,22 +56,16 @@ export const RightContainer = styled.div`
 
 export const Title = styled.h2`
    font-family: "Road Rage", sans-serif;
-   font-size: 40px;
-   color: #fff;
+   font-size: 50px;
+   color: #9758a6;
 
-
-   span{
-    color: #9758a6;
-    font-family: "Road Rage", sans-serif;
-
-   }
 `;
 
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 20px;
+  gap: 10px;
+  padding: 10px;
   width: 100%;
   max-width: 400px;
 `;
@@ -83,15 +77,15 @@ export const InputContainer = styled.div`
   width: 100%;
 
   input {
-    width:100;
+    width: 80;
     border: none;
-    height: 52px;
+    height: 40px;
     border-radius: 5px;
     padding: 0 16px;
   }
 
   label {
-    font-size: 18px;
+    font-size: 14px;
     font-weight: 600;
     color: #fff;
   }
@@ -105,5 +99,3 @@ export const InputContainer = styled.div`
     margin: 5px;
   }
 `;
-
-
