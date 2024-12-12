@@ -2,22 +2,29 @@ import { useEffect, useState } from 'react';
 import { api } from '../../services/api';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import { 
-  Container, 
-  ContainerItens, 
-  Title,} 
-from './styles';
+import {
+  Container,
+  Title,
+}
+  from './styles';
+import { CardProduct } from '../CardProduct';
+import { formartPrice } from '../../utils/formatPrice';
 
 export function OffersCarousel() {
-  const [offers, setOffers] = useState([]);
+  const [offer, setOffers] = useState([]);
 
   useEffect(() => {
-    async function loadProducts(){
+    async function loadProducts() {
       const { data } = await api.get('/products')
-      
-      const onlyOffers = data.filter( products => products.offers)
 
-      setOffers(onlyOffers)
+      const onlyOffers = data
+        .filter((product) => product.offer)
+        .map((product) => ({
+          currencyValue: formartPrice(product.price),
+          ...product,
+        }));
+
+      setOffers(onlyOffers);
     }
 
     loadProducts();
@@ -47,23 +54,22 @@ export function OffersCarousel() {
     <Container>
 
       <Title>OFERTAS DO DIA</Title>
-      <Carousel  
+      <Carousel
         responsive={responsive}
         infinite={true}
         partialVisbile={false}
         itemClass='carousel-item'
-        >
-         
-          {offers.map( product =>(
-            
-            <ContainerItens key={product.id} 
-            imageUrl={product.url}>
-            <p>{product.name}</p>
-            
-        </ContainerItens>
-          ))} 
+      >
+
+        {offer.map(product => (
+            <CardProduct key={product.id} product={product}/>
+
+        ))}
+
+
       </Carousel>
-     
+
 
     </Container>
-  )};
+  )
+};
