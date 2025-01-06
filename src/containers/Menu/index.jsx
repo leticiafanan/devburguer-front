@@ -21,6 +21,7 @@ export function Menu() {
   const [activeCategory, setActiveCategory] = useState(() => {
     const categoryId = +queryParams.get('categoria');
 
+
     if(categoryId){
       return categoryId;
     }
