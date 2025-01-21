@@ -48,30 +48,31 @@ export function Login() {
 
 
   const onSubmit = async (data) => {
-    const {
-      data: userData,
-    } = await toast.promise(
-      api.post('/session', {
-        email: data.email,
-        password: data.password,
-      }),
-      {
-        pending: 'Verificando seus dados.',
-        success: {
-          render() {
-            setTimeout(() => {
-              navigate('/');
-            },2000);
-            return 'Seja Bem-vindo(a) 🥰'
+    try {
+      const { data: userData } = await toast.promise(
+        api.post('/session', {
+          email: data.email,
+          password: data.password,
+        }),
+        {
+          pending: 'Verificando seus dados.',
+          success: {
+            render() {
+              setTimeout(() => {
+                navigate('/');
+              }, 2000);
+              return 'Seja Bem-vindo(a) 🥰';
+            },
           },
-        },
-        error: 'Email ou senha incorretos 🤯'
-      },
-
-    );
-    putUserData(userData);
+          error: 'Email ou senha incorretos 🤯',
+        }
+      );
+      putUserData(userData);
+    } catch (error) {
+      console.error('Falha no login:',error);
+  }
+  
   };
-
 
 
   return (
