@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useCart } from '../../hooks/CartContext';
-import {api} from '../../services/api';
+import { api } from '../../services/api';
 import { formartPrice } from "../../utils/formatPrice";
 import { Button } from "../Button";
 import { Container } from './styles';
@@ -14,71 +14,78 @@ export function CartResume() {
 
   const navigate = useNavigate();
 
-  const {cartProducts, clearCart} = useCart();
+  const { cartProducts, clearCart } = useCart();
 
   useEffect(() => {
     const sumAllItems = cartProducts.reduce((acc, current) => {
-       return current.price * current.quantity + acc;
-     }, 0);
+      return current.price * current.quantity + acc;
+    }, 0);
 
-      
-     setFinalPrice(sumAllItems)
+
+    setFinalPrice(sumAllItems)
   }, [cartProducts]);
 
 
 
   const submitOrder = async () => {
-  
-    const products = cartProducts.map((product) =>{
-      return { id: product.id, quantity: product.quantity };
+
+    const products = cartProducts.map((product) => {
+      return { 
+        id: product.id, 
+        quantity: product.quantity, 
+        price: product.price,
+       };
     });
+
+
+    
 
     try {
 
-      const {status} = await api.post('/orders', {products}, {
-        validateStatus: () => true,
-      });
+    const {status} = await api.post('/orders', {products}, {
+    validateStatus: () => true,
+     });
 
 
 
-    if(status === 200 || status === 201) {
-      clearCart();
-      setTimeout(() => {
-        navigate('/');
-      }, 2000);
+     if(status === 200 || status === 201) {
+       clearCart();
+       setTimeout(() => {
+         navigate('/complete');
+       }, 2000);
 
-      toast.success('Pedido Realizado com Sucesso!')
-    } else if(status === 409) {
-      toast.error('Falha ao realizar seu pedido.')
-    } else {
-      throw new Error();
-    }
-  } catch (error) {
-    toast.error('😭 Falha no sistema! Tente novamente.');
-  }
+       toast.success('Pedido Realizado com Sucesso!')
+     } else if(status === 409) {
+       toast.error('Falha ao realizar seu pedido.')
+     } else {
+       throw new Error();
+     }
+    } catch (error) {
+      toast.error('😭 Falha no sistema! Tente novamente.');
+     }
   };
 
 
 
   return (
     <div>
-    <Container>
-      <div className="container-top">
-        <h2 className="title">Resumo do Pedido</h2>
-        <p className="items">Itens</p>
-        <p className="items-price">{formartPrice(finalPrice)}</p>
-        <p className="delivery-tax">Taxa de Entrega</p>
-        <p className="delivery-tax-price">{formartPrice(deliveryTax)}</p>
-      </div>
+      <Container>
+        <div className="container-top">
+          <h2 className="title">Resumo do Pedido</h2>
+          <p className="items">Itens</p>
+          <p className="items-price">{formartPrice(finalPrice)}</p>
+          <p className="delivery-tax">Taxa de Entrega</p>
+          <p className="delivery-tax-price">{formartPrice(deliveryTax)}</p>
+        </div>
 
 
-      <div className="container-bottom">
-        <p>Total</p>
-        <p>{formartPrice(finalPrice + deliveryTax)}</p>
-      </div>
-    </Container>
+        <div className="container-bottom">
+          <p>Total</p>
+          <p>{formartPrice(finalPrice + deliveryTax)}</p>
+        </div>
+      </Container>
 
-    <Button onClick={submitOrder}>Finalizar Pedido</Button>
+      <Button onClick={submitOrder}>Finalizar Pedido</Button>
     </div>
   );
 }

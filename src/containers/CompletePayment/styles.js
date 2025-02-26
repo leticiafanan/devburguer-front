@@ -28,6 +28,8 @@ export const Banner = styled.div`
   }
 `;
 
+
+
 export const Title = styled.div`
   font-size: 32px;
   font-weight: 800;
@@ -56,6 +58,62 @@ export const Content = styled.div`
   max-width: 1280px;
   padding: 40px;
   margin: 0 auto;
-`;
+
+
+  div{
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 100px ;
+  }
+
+
+  h1{
+    width: 171;
+    height: 48;
+    top: 590px;
+    left: 637px;
+    color: ${props => props.theme.purple};
+
+    font-family: Poppins;
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 48px;
+    letter-spacing: 0%;
+    text-align: center;
+    margin-top: 20px;
+    margin-left: 120px ;
+
+  flex-direction: column;
+  }
+
+  h2{
+    height: 900px;
+    width: 850px;
+    margin-left: 250px;
+    margin-top: 20px;
+
+    font-family: Poppins;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 36px;
+    letter-spacing: 0%;
+    text-align: center;
+    color:#000000
+  }
+  
+  a{
+    margin-top: -790px;
+  }
+  }
+`
+
+
 
 

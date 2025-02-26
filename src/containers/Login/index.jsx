@@ -58,9 +58,13 @@ export function Login() {
           pending: 'Verificando seus dados.',
           success: {
             render() {
-              setTimeout(() => {
+              setTimeout(() => { 
+                if (userData?.admin) {
+                  navigate('/admin/pedidos');
+                } else {
                 navigate('/');
-              }, 2000);
+              }
+            }, 2000);
               return 'Seja Bem-vindo(a) 🥰';
             },
           },
