@@ -7,7 +7,11 @@ export function Router() {
   return (
     <Routes>
       <Route path="/" element={<UserLayout />}>
-        <Route index element={<Home />} />
+        
+      
+
+        <Route index element={<Login />} />
+        <Route path="/" element={<Home />} />
         <Route path="cardapio" element={<Menu />} />
         <Route path="carrinho" element={<Cart />} />
         <Route path="checkout" element={<Checkout />} />
@@ -21,8 +25,6 @@ export function Router() {
         <Route path="produtos" element={<Products />} />
       </Route>
 
-      <Route path="/login" element={<Login />} />
-      <Route path="/cadastro" element={<Register />} />
     </Routes>
   );
 }
