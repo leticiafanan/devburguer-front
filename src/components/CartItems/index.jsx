@@ -1,6 +1,6 @@
 import { Table } from '../index';
 import { useCart } from '../../hooks/CartContext';
-import { formartPrice } from '../../utils/formatPrice';
+import { formatPrice } from '../../utils/formatPrice';
 import TrashIcon from  '../../assets/trash.svg';
 import { ButtonGroup, EmptyCart, ProductImage, TotalPrice, TrashImage } from './styles';
 
@@ -47,7 +47,7 @@ export function CartItems() {
 
             <Table.Td>
               <TotalPrice>
-              {formartPrice(product.quantity * product.price) }
+              {formatPrice(product.quantity * product.price) }
               </TotalPrice>
               </Table.Td>
 

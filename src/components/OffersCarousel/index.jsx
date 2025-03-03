@@ -8,7 +8,7 @@ import {
 }
   from './styles';
 import { CardProduct } from '../CardProduct';
-import { formartPrice } from '../../utils/formatPrice';
+import { formatPrice } from '../../utils/formatPrice';
 
 export function OffersCarousel() {
   const [offer, setOffers] = useState([]);
@@ -20,7 +20,7 @@ export function OffersCarousel() {
       const onlyOffers = data
         .filter((product) => product.offer)
         .map((product) => ({
-          currencyValue: formartPrice(product.price),
+          currencyValue: formatPrice(product.price),
           ...product,
         }));
 

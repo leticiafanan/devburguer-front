@@ -22,7 +22,8 @@ export const FilterOption = styled.button`
   cursor: pointer;
   background: none;
   border: none;
-  color: ${(props) => props.theme.darkGray};
+  color:${(props) => props.$isActiveStatus ? props.theme.purple :  props.theme.darkGray};
+  border-bottom: ${(props) => props.$isActiveStatus ? `2px solid ${props.theme.purple}` : 'none'};
   font-size: 18px;
   line-height: 20px;
   padding-bottom: 5px;

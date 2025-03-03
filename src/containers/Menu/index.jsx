@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Container, Banner, CategoryMenu, ProductsContainer, CategoryButton } from './styles';
 import { api } from '../../services/api';
-import { formartPrice } from '../../utils/formatPrice';
+import { formatPrice } from '../../utils/formatPrice';
 import { CardProduct } from '../../components/CardProduct';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -45,7 +45,7 @@ export function Menu() {
 
       const newProducts = data
         .map((product) => ({
-          currencyValue: formartPrice(product.price),
+          currencyValue: formatPrice(product.price),
           ...product,
         }));
 

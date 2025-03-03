@@ -67,9 +67,11 @@ export function Login() {
             }, 2000);
               return 'Seja Bem-vindo(a) 🥰';
             },
+            
           },
           error: 'Email ou senha incorretos 🤯',
         }
+        
       );
       putUserData(userData);
     } catch (error) {

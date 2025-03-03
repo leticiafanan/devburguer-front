@@ -7,8 +7,7 @@ import {
   Container,
   ContainerItens,
   Title,
-}
-  from './styles';
+} from './styles';
 import { useNavigate } from 'react-router-dom';
 
 export function CategoriesCarousel() {
@@ -17,15 +16,12 @@ export function CategoriesCarousel() {
 
   useEffect(() => {
     async function loadCategories() {
-      const { data } = await api.get('/categories')
-
+      const { data } = await api.get('/categories');
       setCategories(data);
-     
     }
 
     loadCategories();
   }, []);
-
 
   const responsive = {
     superLargeDesktop: {
@@ -48,37 +44,25 @@ export function CategoriesCarousel() {
 
   return (
     <Container>
-
       <Title>CATEGORIAS</Title>
-
       <Carousel
         responsive={responsive}
         infinite={true}
         partialVisbile={false}
         itemClass='carousel-item'
       >
-
         {categories.map(category => (
-
-          <ContainerItens key={category.id}
-            imageUrl={category.url}>
-
+          <ContainerItens key={category.id} imageUrl={category.url}>
             <CategoryButton
               onClick={() => {
-                navigate({
-                  pathname: '/cardapio',
-                  search: `?categorias=${category.id}`,
-                });
+                navigate(`/categoria/${category.name}`);
               }}
-            
             >
-              {category.name}</CategoryButton>
-
-
+              {category.name}
+            </CategoryButton>
           </ContainerItens>
         ))}
       </Carousel>
-
     </Container>
-  )
-};
+  );
+}
